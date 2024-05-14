@@ -1,87 +1,96 @@
-# Simple ATM Simulation
+# ATM Application
 
-This is a basic ATM simulation program implemented in Python. It allows users to log in with a PIN and perform operations such as checking balance, depositing funds, and withdrawing funds.
+This project is a simple ATM (Automated Teller Machine) application implemented using Django and Django REST Framework. It allows users to perform basic banking operations like depositing money, withdrawing money, and checking account balances through a RESTful API.
 
 ## Features
 
-- **Login System**: Users must enter a valid PIN to access their account.
-- **Operations**:
-  - Check Balance: View the current account balance.
-  - Deposit: Add funds to the account.
-  - Withdraw: Withdraw funds from the account (if sufficient balance).
-  - Logout: Exit the ATM system.
+- **User Account Management**
 
-## Getting Started
+  - Create and manage user accounts.
+  - Change PIN for user accounts.
 
-1. **Prerequisites**:
+- **Banking Operations**
 
-   - Python 3 installed on your system.
+  - Deposit money into an account.
+  - Withdraw money from an account.
+  - Check account balance.
 
-2. **Setup**:
+- **Transaction History**
 
-   - Download or clone the `ATM.py` script.
+  - View transaction history.
+  - Generate mini statements and detailed statements.
 
-3. **Running the Program**:
+- **Additional Features**
+  - Bill payments.
+  - Mobile recharge services.
+  - Prepaid electricity reload.
 
-   - Open a terminal or command prompt.
-   - Navigate to the directory containing `ATM.py`.
-   - Run the program using the following command:
-     ```
-     python3 ATM.py
-     ```
+## Installation
 
-4. **Using the ATM**:
-   - Upon running the program, you will be prompted to enter a PIN.
-   - Use one of the following dummy PINs for testing:
-     - `1234` (John Doe)
-     - `5678` (Jane Smith)
-   - Once logged in, you can choose from the available options:
-     - Enter `1` to check balance.
-     - Enter `2` to deposit funds.
-     - Enter `3` to withdraw funds.
-     - Enter `4` to logout and exit.
+1. Clone the repository:
 
-## Sample Usage
+   ```bash
+   git clone https://github.com/ktsoaela/DIGITAL_BANKING.git
+   ```
 
+2. Navigate into the project directory:
+
+   ```bash
+   cd atm
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Apply database migrations:
+
+   ```bash
+   python manage.py migrate
+   ```
+
+5. Start the development server:
+
+   ```bash
+   python manage.py runserver
+   ```
+
+6. Access the application at [http://localhost:8000/](http://localhost:8000/).
+
+## Usage
+
+- **API Endpoints**:
+
+  - Deposit money: `/api/deposit/`
+  - Withdraw money: `/api/withdraw/`
+  - Account balance: `/api/balance/`
+  - User account management: `/api/accounts/`
+
+- **Web Interface**:
+  - Access the deposit page: [http://localhost:8000/deposit/](http://localhost:8000/deposit/)
+  - Access the withdraw page: [http://localhost:8000/withdraw/](http://localhost:8000/withdraw/)
+
+## Testing
+
+Run tests using the following command:
+
+```bash
+python manage.py test atm
 ```
-==== Welcome to the ATM ====
-Please enter your PIN: 1234
-Welcome Mr Doe!
-1. Check Balance
-2. Deposit
-3. Withdraw
-4. Logout
-Enter your choice (1-4): 1
-Your balance is: $1000
 
-1. Check Balance
-2. Deposit
-3. Withdraw
-4. Logout
-Enter your choice (1-4): 2
-Enter deposit amount: $500
-Deposited $500. Current balance is $1500
+## Contributing
 
-1. Check Balance
-2. Deposit
-3. Withdraw
-4. Logout
-Enter your choice (1-4): 3
-Enter withdrawal amount: $300
-Withdrew $300. Current balance is $1200
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
 
-1. Check Balance
-2. Deposit
-3. Withdraw
-4. Logout
-Enter your choice (1-4): 4
-Logged out. Thank you for using the ATM. Goodbye!
-```
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature-branch`).
+3. Make your changes.
+4. Commit your changes (`git commit -am 'Add new feature'`).
+5. Push to the branch (`git push origin feature-branch`).
+6. Create a new Pull Request.
 
-## Notes
+## License
 
-- This is a simplified simulation for educational purposes.
-- Dummy account details (names, balances) are provided within the program.
-- Feel free to extend or modify the code for additional features or improvements.
-
----
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

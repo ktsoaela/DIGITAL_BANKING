@@ -2,3 +2,4 @@ pycountry
 djangorestframework
 markdown
 django-filter
+python-dotenv
