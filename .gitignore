@@ -1,3 +1,7 @@
+aenv/
+
 ATM.py
 BANKING/db.sqlite3
+
+atm-frontend/.env
 BANKING/BANKING/.env

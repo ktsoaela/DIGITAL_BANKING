@@ -1,5 +1,27 @@
+python-dotenv
+django
+psycopg2-binary
+django-redis
+redis
 pycountry
 djangorestframework
-markdown
+django-cors-headers
+Markdown
 django-filter
-python-dotenv
+
+
+
+# sgiref==3.8.1
+# async-timeout==4.0.3
+# Django==5.0.6
+# django-cors-headers==4.3.1
+# django-filter==24.2
+# django-redis==5.4.0
+# djangorestframework==3.15.1
+# Markdown==3.6
+# psycopg2-binary==2.9.9
+# pycountry==24.6.1
+# python-dotenv==1.0.1
+# redis==5.0.4
+# sqlparse==0.5.0
+# typing_extensions==4.12.0

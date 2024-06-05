@@ -1,6 +1,6 @@
 // src/components/Register.js
 import React, { useState } from 'react';
-import { registerUser } from '../api/api_connection';
+import { registerUser } from '../utils/api_connection';
 
 const Register = () => {
   const [username, setUsername] = useState('');
