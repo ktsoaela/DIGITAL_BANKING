@@ -1,0 +1,64 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    env_file:
+      - ./BANKING/BANKING/.env
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  redis:
+    image: redis:latest
+    networks:
+      - app-network
+
+  web:
+    build: ./BANKING
+    command: bash -c "python manage.py migrate && python manage.py collectstatic --no-input && python manage.py runserver dockerhost:8000"
+    env_file:
+      - ./BANKING/BANKING/.env
+    volumes:
+      - ./BANKING:/app
+    depends_on:
+      - db
+      - redis
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./atm-frontend
+      dockerfile: Dockerfile
+    env_file:
+      - ./atm-frontend/.env
+    volumes:
+      - ./atm-frontend/build:/app/build
+    networks:
+      - app-network
+
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - '80:80'
+    depends_on:
+      - web
+      - frontend
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+    driver: local
+  web_data:
+    driver: local
+  frontend_build:
+    driver: local
+
+networks:
+  app-network:
+    driver: bridge
