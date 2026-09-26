@@ -1,0 +1,8 @@
+{% extends "dashboard/surface.html" %}
+{% block title %}ATM receipt · KHOEBO{% endblock %}
+{% block eyebrow %}KHOEBO / ATM CENTER / RECEIPT{% endblock %}
+{% block heading %}Transaction complete.{% endblock %}
+{% block intro %}Your transaction has been approved and recorded. This receipt is linked to your KHOEBO account.{% endblock %}
+{% block content %}
+<section class="proof-sheet atm-receipt"><div class="proof-header"><span class="proof-check">✓</span><div><p class="label">KHOEBO ATM · {{ transfer.terminal.terminal_id }}</p><h2>{{ transfer.get_direction_display }}</h2></div><span class="row-status">{{ transfer.status }}</span></div><div class="proof-amount"><span>Amount</span><strong>R {{ transfer.amount|floatformat:2 }}</strong></div><div class="proof-grid"><div><span>Receipt number</span><strong>{{ receipt.receipt_number }}</strong></div><div><span>Transaction reference</span><strong>{{ transfer.reference }}</strong></div><div><span>Account</span><strong>{{ transfer.account_label }}</strong></div><div><span>Recipient / voucher</span><strong>{{ transfer.recipient|default:"Not applicable" }}</strong></div><div><span>Terminal</span><strong>{{ transfer.terminal.location }} · {{ transfer.terminal.terminal_id }}</strong></div><div><span>Date and time</span><strong>{{ transfer.created_at|date:"d M Y, H:i" }}</strong></div></div><div class="proof-actions"><button type="button" onclick="window.print()">Print receipt ↗</button><a href="{% url 'atm_center' transfer.terminal.terminal_id %}">Start another service</a><a href="{% url 'transactions' %}">View transactions</a></div></section>
+{% endblock %}

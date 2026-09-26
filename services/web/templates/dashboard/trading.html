@@ -1,0 +1,9 @@
+{% extends "dashboard/surface.html" %}
+{% block title %}Khoebo markets{% endblock %}
+{% block eyebrow %}KHOEBO / MARKETS{% endblock %}
+{% block heading %}Trade with a longer view.{% endblock %}
+{% block intro %}Watch the market, choose your position, and queue an order for execution.{% endblock %}
+{% block content %}
+<section class="workspace-grid"><article class="workspace-panel"><p class="label">Watchlist</p><div class="quote"><span><b>KHOE</b><small>Khoebo Holdings</small></span><strong>R 128.40 <em>+2.8%</em></strong></div><div class="quote"><span><b>NOVA</b><small>Nova Energy</small></span><strong>R 76.15 <em>+0.9%</em></strong></div><a class="text-link" href="http://localhost:8003/docs">View trading API ↗</a></article><article class="workspace-panel dark-panel"><p class="label">Portfolio value</p><strong>R 41,205.80</strong><p class="muted">+ R 1,240.20 this month</p></article></section>
+<form class="action-form" hx-post="{% url 'action_result' %}" hx-target="#action-result" hx-swap="innerHTML"><p class="label">Queue an order</p><input type="hidden" name="action" value="Trading order"><label>Instrument<select name="symbol"><option>KHOE</option><option>NOVA</option></select></label><label>Side<select name="side"><option>Buy</option><option>Sell</option></select></label><label>Quantity<input name="quantity" type="number" min="1" value="1" required></label><button type="submit">Review order <span>↗</span></button></form><div id="action-result"></div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}KHOEBO DIGITAL BANKING{% endblock %}</title>
+	<link rel="stylesheet" href="{% static 'css/app.css' %}">
+	<link rel="stylesheet" href="{% static 'css/crud.css' %}">
+	<link rel="stylesheet" href="{% static 'css/atm.css' %}">
+	<link rel="stylesheet" href="{% static 'css/proof.css' %}">
+	<script src="https://unpkg.com/htmx.org@2.0.4"></script>
+</head>
+<body>
+<main class="shell">
+	<nav class="surface-nav">
+		<a href="{% url 'home' %}">KHOEBO / DIGITAL BANKING</a>
+		<div class="nav-links">
+			<a href="{% url 'home' %}">Dashboard</a>
+			<a href="{% url 'accounts' %}">Accounts</a>
+			<a href="{% url 'transactions' %}">Transactions</a>
+			<a href="{% url 'payments' %}">Payments</a>
+			<a href="{% url 'cards' %}">Cards</a>
+			<a href="{% url 'debit_orders' %}">Debit orders</a>
+			<a href="{% url 'services' %}">Buy services</a>
+			<a href="{% url 'mobile' %}">Mobile</a>
+			<a href="{% url 'atm' %}">ATM</a>
+			<form method="post" action="{% url 'logout' %}">{% csrf_token %}<button type="submit">Log out</button></form>
+		</div>
+	</nav>
+	<header class="masthead surface-head"><div><p class="eyebrow">{% block eyebrow %}{% endblock %}</p><h1>{% block heading %}{% endblock %}</h1><p class="lede">{% block intro %}{% endblock %}</p></div><div class="status"><span></span>{{ request.user.first_name|default:request.user.username }} · Secure session</div></header>
+	{% block content %}{% endblock %}
+	<footer><span>Built for Khotso</span><span>2026 platform baseline</span><span>Security · Support</span></footer>
+</main>
+</body>
+</html>

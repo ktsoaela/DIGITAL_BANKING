@@ -1,0 +1,6 @@
+{% extends "dashboard/surface.html" %}
+{% block title %}Proof of payment · KHOEBO{% endblock %}
+{% block eyebrow %}BANKA / PROOF OF PAYMENT{% endblock %}
+{% block heading %}Payment confirmed.{% endblock %}
+{% block intro %}A clear receipt you can view, print, or share with the beneficiary.{% endblock %}
+{% block content %}<section class="proof-sheet"><div class="proof-header"><span class="proof-check">✓</span><div><p class="label">KHOEBO DIGITAL BANKING</p><h2>Proof of payment</h2></div><span class="row-status">{{ payment.status }}</span></div><div class="proof-amount"><span>Amount</span><strong>R {{ payment.amount|floatformat:2 }}</strong></div><div class="proof-grid"><div><span>Receipt number</span><strong>{{ proof.receipt_number }}</strong></div><div><span>Date and time</span><strong>{{ proof.created_at|date:"d M Y, H:i" }}</strong></div><div><span>Beneficiary</span><strong>{{ payment.beneficiary }}</strong></div><div><span>Reference</span><strong>{{ payment.reference }}</strong></div></div><div class="proof-actions"><button type="button" onclick="window.print()">Print proof ↗</button><a href="{% url 'payments' %}">Back to payments</a></div></section>{% endblock %}

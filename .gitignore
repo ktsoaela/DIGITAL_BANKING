@@ -1,7 +1,6 @@
-aenv/
-
-ATM.py
-BANKING/db.sqlite3
-
-atm-frontend/.env
-BANKING/BANKING/.env
+__pycache__/
+*.py[cod]
+*.sqlite3
+.env
+.venv/
+staticfiles/

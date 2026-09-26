@@ -1,0 +1,17 @@
+{% extends "dashboard/surface.html" %}
+{% block title %}Banka core{% endblock %}
+{% block eyebrow %}BANKA / EVERYDAY BANKING{% endblock %}
+{% block heading %}Move money with clarity.{% endblock %}
+{% block intro %}Manage saved recipients, savings goals, and account activity from one workspace.{% endblock %}
+{% block content %}
+{% if messages %}{% for message in messages %}<div class="action-result">{{ message }}</div>{% endfor %}{% endif %}
+<section class="workspace-grid"><article class="workspace-panel dark-panel"><p class="label">Available balance</p><strong><a class="balance-link" href="{% url 'accounts' %}">View account balances ↗</a></strong><p class="muted">Accounts · payments · statements</p></article><article class="workspace-panel"><p class="label">Savings pockets</p><strong>{{ pockets|length }} active</strong><p class="muted">Set a target, update it, and manage each goal.</p></article></section>
+<section class="crud-grid">
+  <article class="table-panel"><div class="table-toolbar"><p class="label">Beneficiaries</p></div><form method="post" class="inline-form">{% csrf_token %}<input type="hidden" name="action" value="create_beneficiary"><input name="name" placeholder="Recipient name" required><input name="account_identifier" placeholder="Account or cellphone alias" required><button type="submit">Add ↗</button></form>
+  {% for beneficiary in beneficiaries %}<div class="crud-row"><div><strong>{{ beneficiary.name }}</strong><small>{{ beneficiary.bank_label }} · {{ beneficiary.account_identifier }}</small></div><span class="row-actions"><a href="{% url 'beneficiary_edit' beneficiary.pk %}">Edit</a><form method="post" action="{% url 'beneficiary_delete' beneficiary.pk %}">{% csrf_token %}<button class="quiet-button" type="submit">Delete</button></form></span></div>{% empty %}<p class="muted">No beneficiaries saved.</p>{% endfor %}</article>
+  <article class="table-panel"><div class="table-toolbar"><p class="label">Savings pockets</p></div><form method="post" class="inline-form">{% csrf_token %}<input type="hidden" name="action" value="create_pocket"><input name="name" placeholder="Pocket name" required><input name="target_amount" type="number" min="1" step="0.01" placeholder="Target amount" required><button type="submit">Create ↗</button></form>
+  {% for pocket in pockets %}<div class="crud-row"><div><strong>{{ pocket.name }}</strong><small>R {{ pocket.balance|floatformat:2 }} of R {{ pocket.target_amount|floatformat:2 }} · {{ pocket.rate }}% projected</small></div><span class="row-actions"><a href="{% url 'pocket_edit' pocket.pk %}">Edit</a><form method="post" action="{% url 'pocket_delete' pocket.pk %}">{% csrf_token %}<button class="quiet-button" type="submit">Delete</button></form></span></div>{% empty %}<p class="muted">No savings pockets saved.</p>{% endfor %}</article>
+</section>
+<section class="workspace-panel"><p class="label">Payments and transfers</p><p class="muted">Create a draft, choose the source account, review the recipient and amount, then execute from the Payments workspace.</p><a class="text-link" href="{% url 'payments' %}">Open payments and transfers ↗</a> · <a class="text-link" href="{% url 'accounts' %}">Manage accounts ↗</a></section>
+<p><a class="text-link" href="{% url 'rewards' %}">Manage KHOEBO rewards ↗</a></p>
+{% endblock %}

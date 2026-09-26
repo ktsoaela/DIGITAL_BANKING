@@ -1,0 +1,15 @@
+{% extends "dashboard/surface.html" %}
+{% block title %}Edit {{ record_type }} · KHOEBO{% endblock %}
+{% block eyebrow %}BANKA / RECORD MANAGEMENT{% endblock %}
+{% block heading %}Update {{ record_type|lower }}.{% endblock %}
+{% block intro %}Changes are saved to your account record and reflected across the banking workspace.{% endblock %}
+{% block content %}
+<form method="post" class="action-form edit-form">
+  {% csrf_token %}
+  <p class="label">{{ record_type }} details</p>
+  {% for field in fields %}
+  <label>{{ field.label }}<input name="{{ field.name }}" type="{{ field.type }}" value="{{ field.value }}" {% if field.type == "number" %}min="0" step="0.01"{% endif %} required></label>
+  {% endfor %}
+  <button type="submit">Save changes <span>↗</span></button>
+</form>
+{% endblock %}

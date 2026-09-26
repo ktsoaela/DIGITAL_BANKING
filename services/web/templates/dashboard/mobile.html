@@ -1,0 +1,6 @@
+{% extends "dashboard/surface.html" %}
+{% block title %}Mobile banking · KHOEBO{% endblock %}
+{% block eyebrow %}BANKA APP / MOBILE EXPERIENCE{% endblock %}
+{% block heading %}Your bank, in your pocket.{% endblock %}
+{% block intro %}The KHOEBO mobile client mirrors the account workspace with biometric approvals, card controls, instant payments, and low-data access.{% endblock %}
+{% block content %}<section class="mobile-preview"><div class="phone-frame"><div class="phone-top"><span>KHOEBO</span><span>09:41</span></div><p class="label">Available balance</p><strong>R 24,680.00</strong><div class="phone-actions"><span>Pay</span><span>Send</span><span>Cards</span><span>ATM</span></div><div class="phone-line"><span>Salary received</span><b class="positive">+ R 18,500</b></div><div class="phone-line"><span>Card purchase</span><b>- R 420</b></div></div><div class="mobile-details"><p class="eyebrow">Mobile client starter</p><h2>One account story across every screen.</h2><p class="muted">The Flutter starter in <strong>KHOEBO_DIGITAL_BANKING/mobile</strong> is ready to connect to the Banka, ATM, and Khoebo APIs using an environment-specific base URL.</p><a class="text-link" href="{% url 'capabilities' %}#mobile">View mobile capabilities ↗</a></div></section>{% endblock %}

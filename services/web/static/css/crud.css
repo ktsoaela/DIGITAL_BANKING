@@ -1,0 +1,25 @@
+.crud-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:18px; }
+.inline-form { display:grid; grid-template-columns:1fr 1fr auto; gap:8px; border-bottom:1px solid var(--line); padding:0 0 16px; margin-bottom:4px; }
+.inline-form input,.inline-form select { min-width:0; border:1px solid var(--line); padding:11px; font:13px Arial,sans-serif; }
+.inline-form button { border:0; background:var(--ink); color:#fff; padding:11px 14px; font:700 12px Arial,sans-serif; cursor:pointer; white-space:nowrap; }
+.crud-row { display:flex; justify-content:space-between; align-items:center; gap:14px; border-bottom:1px solid var(--line); padding:14px 0; font:13px Arial,sans-serif; }
+.crud-row small { display:block; color:var(--muted); margin-top:5px; font-size:11px; }
+.quiet-button { border:0; background:none; color:var(--accent); font:700 11px Arial,sans-serif; cursor:pointer; padding:4px 0; }
+.row-actions { display:flex; align-items:center; gap:12px; }
+.row-actions a { color:var(--ink); font:700 11px Arial,sans-serif; text-decoration:none; }
+.portfolio-line { display:flex; justify-content:space-between; border-top:1px solid #ffffff33; margin-top:28px; padding-top:16px; font:13px Arial,sans-serif; }
+.trade-form { grid-template-columns:1fr 1fr 1fr 1fr auto; }
+.edit-form { max-width:900px; }
+.account-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:20px 0 80px; }
+.account-card h2 { margin:18px 0 6px; font-size:25px; font-weight:400; }
+.account-card > strong { display:block; margin:18px 0; font-size:32px; font-weight:400; }
+.account-number { color:var(--muted); font:12px Arial,sans-serif; }
+.balance-link { color:#fff; font-size:23px; text-decoration:none; }
+.account-card .row-actions { flex-wrap:wrap; border-top:1px solid var(--line); padding-top:14px; }
+.account-card .row-actions > a { color:var(--ink); text-decoration:none; font:700 11px Arial,sans-serif; }
+.filter-bar { display:flex; flex-wrap:wrap; align-items:end; gap:12px; margin-bottom:18px; padding:18px; background:#e6eee9; border:1px solid #ccdad2; }
+.filter-bar label { min-width:240px; color:var(--muted); font:700 10px Arial,sans-serif; text-transform:uppercase; letter-spacing:1px; }
+.filter-bar select { display:block; width:100%; margin-top:7px; padding:11px; border:1px solid var(--line); background:#fff; }
+.filter-bar button { border:0; background:var(--ink); color:#fff; padding:12px 16px; font:700 12px Arial,sans-serif; cursor:pointer; }
+@media (max-width:720px) { .crud-grid { grid-template-columns:1fr; } .inline-form,.trade-form { grid-template-columns:1fr; } .inline-form button { width:max-content; } }
+@media (max-width:720px) { .account-grid { grid-template-columns:1fr; } .filter-bar { display:grid; grid-template-columns:1fr; }.filter-bar label { min-width:0; } }

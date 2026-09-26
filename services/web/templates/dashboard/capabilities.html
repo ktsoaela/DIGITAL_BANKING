@@ -1,0 +1,12 @@
+{% extends "dashboard/surface.html" %}
+{% block title %}KHOEBO capabilities{% endblock %}
+{% block eyebrow %}KHOEBO / CAPABILITY MAP{% endblock %}
+{% block heading %}One platform. Every money moment.{% endblock %}
+{% block intro %}KHOEBO brings web, mobile, forex, ATM, savings, credit, payments, and rewards into one locally governed experience.{% endblock %}
+{% block content %}
+<nav class="capability-nav" aria-label="Capability sections">{% for group in capability_groups %}<a href="#{{ group.key }}">{{ forloop.counter|stringformat:"02d" }} {{ group.key|title }}</a>{% endfor %}</nav>
+{% for group in capability_groups %}
+<section id="{{ group.key }}" class="capability-section"><div class="capability-intro"><p class="eyebrow">{{ group.eyebrow }}</p><h2>{{ group.title }}</h2><p>{{ group.intro }}</p></div><div class="capability-list">{% for name, description in group.features %}<article class="capability-item"><span class="feature-number">{{ forloop.counter|stringformat:"02d" }}</span><div><h3>{{ name }}</h3><p>{{ description }}</p></div><button hx-post="{% url 'action_result' %}" hx-vals='{"action": "{{ name }}"}' hx-target="#capability-result" hx-swap="innerHTML" aria-label="Try {{ name }}">Try it <span>↗</span></button></article>{% endfor %}</div></section>
+{% endfor %}
+<div id="capability-result"></div>
+{% endblock %}

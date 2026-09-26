@@ -1,0 +1,6 @@
+{% extends "dashboard/surface.html" %}
+{% block title %}Edit order · KHOEBO{% endblock %}
+{% block eyebrow %}KHOEBO / ORDER MANAGEMENT{% endblock %}
+{% block heading %}Adjust your order.{% endblock %}
+{% block intro %}Update the queued order before it is submitted for execution.{% endblock %}
+{% block content %}<form method="post" class="action-form trade-form edit-form">{% csrf_token %}<p class="label">Edit {{ order.instrument.symbol }} order</p><label>Side<select name="side"><option value="buy" {% if order.side == 'buy' %}selected{% endif %}>Buy</option><option value="sell" {% if order.side == 'sell' %}selected{% endif %}>Sell</option></select></label><label>Quantity<input name="quantity" type="number" min="1" value="{{ order.quantity }}" required></label><label>Limit price<input name="limit_price" type="number" min="0.01" step="0.01" value="{{ order.limit_price }}" required></label><button type="submit">Save changes <span>↗</span></button></form>{% endblock %}

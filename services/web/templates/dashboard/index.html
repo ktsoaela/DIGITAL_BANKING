@@ -1,0 +1,65 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KHOEBO DIGITAL BANKING</title>
+  <link rel="stylesheet" href="{% static 'css/app.css' %}">
+  <script src="https://unpkg.com/htmx.org@2.0.4"></script>
+</head>
+<body>
+  <main class="shell">
+    <nav class="surface-nav"><a href="{% url 'home' %}">KHOEBO / DIGITAL BANKING</a><div class="nav-links"><a href="{% url 'transactions' %}">Transactions</a><a href="{% url 'payments' %}">Payments</a><a href="{% url 'mobile' %}">Mobile</a><a href="{% url 'atm' %}">ATM</a><form method="post" action="{% url 'logout' %}">{% csrf_token %}<button type="submit">Log out</button></form></div></nav>
+    <header class="masthead">
+      <div>
+        <p class="eyebrow">KHOEBO / DIGITAL BANKING</p>
+        <h1>Money, moving with intent.</h1>
+        <p class="lede">One calm control surface for everyday banking, cash access, and market participation.</p>
+      </div>
+      <div class="status"><span></span> Platform foundation online</div>
+    </header>
+
+    <section class="balance-panel">
+      <div><p class="label">Available balance</p><strong>R {{ available_total|floatformat:2 }}</strong><p class="balance-note">Across {{ accounts|length }} account{{ accounts|length|pluralize }}</p></div>
+      <div class="account-meta">{% if primary_account %}<a href="{% url 'account_info' primary_account.pk %}"><span>{{ primary_account.name }}</span><span>{{ primary_account.masked_number }} · Account 1 ↗</span></a>{% else %}<a href="{% url 'accounts' %}">Open your first account ↗</a>{% endif %}</div>
+    </section>
+
+    <section class="summary-grid"><article><p class="label">Money in</p><strong>R {{ credits|floatformat:2 }}</strong><span><a href="{% url 'transactions' %}?direction=credit">View credits ↗</a></span></article><article><p class="label">Money out</p><strong>R {{ debits|floatformat:2 }}</strong><span><a href="{% url 'transactions' %}?direction=debit">View debits ↗</a></span></article><article><p class="label">Accounts</p><strong>{{ accounts|length }}</strong><span><a href="{% url 'accounts' %}">Account options ↗</a></span></article><article><p class="label">Savings pockets</p><strong>{{ pockets|length }}</strong><span><a href="{% url 'banking' %}">R {{ pocket_total|floatformat:2 }} · View ↗</a></span></article><article><p class="label">Rewards</p><strong>{{ points_balance }} pts</strong><span><a href="{% url 'rewards' %}">Manage ↗</a></span></article></section>
+
+    <section class="section-heading"><div><p class="eyebrow">Your platform</p><h2>Every channel, one account story.</h2></div><a href="{% url 'capabilities' %}">Explore capabilities ↗</a></section>
+    <section class="service-grid">
+      {% for service in services %}
+      <article class="service-card">
+        <div class="card-top"><span class="index">0{{ forloop.counter }}</span><span class="live">LIVE</span></div>
+        <h3>{{ service.name }}</h3><p>{{ service.purpose }}</p>
+        {% if service.slug == "banka-api" %}
+        <a href="{% url 'banking' %}">Open banking <span>↗</span></a>
+        {% elif service.slug == "banka-app" %}
+        <a href="{% url 'banking' %}#mobile">Open mobile view <span>↗</span></a>
+        {% elif service.slug == "digital-banking-api" %}
+        <a href="{% url 'atm' %}">Open ATM <span>↗</span></a>
+        {% else %}
+        <a href="{% url 'trading' %}">Open trading <span>↗</span></a>
+        {% endif %}
+      </article>
+      {% endfor %}
+    </section>
+
+    <section class="table-panel dashboard-transactions"><div class="table-toolbar"><p class="label">Recent transactions</p><a class="text-link" href="{% url 'transactions' %}">View all ↗</a></div>{% for transaction in transactions %}<div class="transaction-row"><span class="transaction-icon {% if transaction.direction == 'credit' %}credit{% endif %}">{% if transaction.direction == 'credit' %}+{% else %}-{% endif %}</span><div><strong>{{ transaction.description }}</strong><small>{{ transaction.category }} · {{ transaction.created_at|date:"d M Y" }}</small></div><b class="{% if transaction.direction == 'credit' %}positive{% endif %}">{% if transaction.direction == 'credit' %}+{% else %}-{% endif %} R {{ transaction.amount|floatformat:2 }}</b><span class="row-status">{{ transaction.status }}</span></div>{% empty %}<p class="muted">No transactions yet.</p>{% endfor %}</section>
+
+    <section class="feature-strip">
+      <div><p class="eyebrow">KHOEBO capability map</p><h2>Built around the way people actually move money.</h2></div>
+      <div class="feature-links">{% for group in capability_groups %}<a href="{% url 'capabilities' %}#{{ group.key }}"><span>{{ forloop.counter|stringformat:"02d" }}</span>{{ group.eyebrow|cut:" / "|title }} <b>↗</b></a>{% endfor %}</div>
+    </section>
+
+    <section class="feature-strip account-tools"><div><p class="eyebrow">Account tools</p><h2>Everything Chelete started, made actionable.</h2></div><div class="feature-links"><a href="{% url 'bill' %}"><span>01</span>Bills and payments <b>↗</b></a><a href="{% url 'invoice' %}"><span>02</span>Invoices <b>↗</b></a><a href="{% url 'profile' %}"><span>03</span>Profile and verification <b>↗</b></a><a href="{% url 'notification' %}"><span>04</span>Notifications <b>↗</b></a><a href="{% url 'settings_security' %}"><span>05</span>Security settings <b>↗</b></a></div></section>
+
+    <section class="section-heading"><div><p class="eyebrow">KHOEBO rewards</p><h2>Earn points. Choose how to use them.</h2></div><a href="{% url 'rewards' %}">Manage rewards ↗</a></section>
+
+    <section class="feature-strip"><div><p class="eyebrow">Your banking services</p><h2>More ways to manage your money.</h2></div><div class="feature-links"><a href="{% url 'accounts' %}"><span>01</span>Accounts and statements <b>↗</b></a><a href="{% url 'cards' %}"><span>02</span>Cards <b>↗</b></a><a href="{% url 'debit_orders' %}"><span>03</span>Debit orders <b>↗</b></a><a href="{% url 'services' %}"><span>04</span>Airtime, lottery, electricity and fines <b>↗</b></a></div></section>
+
+    <footer><span>Built for Khotso</span><span>2026 platform baseline</span><span>Privacy · Security · Support</span></footer>
+  </main>
+</body>
+</html>

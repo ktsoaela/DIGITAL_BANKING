@@ -1,0 +1,6 @@
+{% extends "dashboard/surface.html" %}
+{% block title %}Edit reward · KHOEBO{% endblock %}
+{% block eyebrow %}KHOEBO / REWARDS LEDGER{% endblock %}
+{% block heading %}Update reward activity.{% endblock %}
+{% block intro %}Update the points record and its explanation.{% endblock %}
+{% block content %}<form method="post" class="action-form edit-form">{% csrf_token %}<p class="label">Reward entry</p><label>Action<select name="action"><option value="earn" {% if entry.action == 'earn' %}selected{% endif %}>Earn</option><option value="redeem" {% if entry.action == 'redeem' %}selected{% endif %}>Redeem</option><option value="adjust" {% if entry.action == 'adjust' %}selected{% endif %}>Adjust</option></select></label><label>Points<input name="points" type="number" min="1" value="{{ entry.points }}" required></label><label>Description<input name="description" value="{{ entry.description }}" required></label><button type="submit">Save reward <span>↗</span></button></form>{% endblock %}
